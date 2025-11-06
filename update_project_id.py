@@ -26,36 +26,18 @@ data_list = df.to_dict(orient="records")
 
 for item in data_list:
     driver.get("https://refex.dev.gensomerp.com/plant-management")
-    # project_name = item.get("site_name")
-    # project_name.strip()
-    # time.sleep(0.5)
-    # search = driver.find_element(By.XPATH, "//input[@placeholder='Search']")    
-    # search.send_keys(project_name)
-    # time.sleep(1)
+    project_name = item.get("site_name")
+    project_name.strip()
+    time.sleep(0.5)
+    search = driver.find_element(By.XPATH, "//input[@placeholder='Search']")    
+    search.send_keys(project_name)
+    time.sleep(1)
     
-    # #Click on Edit icon
-    # edit_icon = driver.find_element(By.XPATH, "//*[@id='main-wrapper']/div[1]/div/app-plant-list/div/div/div[2]/div[2]/table/tbody/tr/td[10]/a[2]")
-    # time.sleep(0.5)
-    # edit_icon.click()
-    # time.sleep(1)
-    
-    try:
-        project_name = item.get("site_name").strip()
-        time.sleep(0.5)
-
-        # Try to find and type in the search box
-        search = driver.find_element(By.XPATH, "//input[@placeholder='Search']")
-        search.send_keys(project_name)
-        time.sleep(1)
-
-        # If search box is found, then continue to edit
-        edit_icon = driver.find_element(By.XPATH, "//*[@id='main-wrapper']/div[1]/div/app-plant-list/div/div/div[2]/div[2]/table/tbody/tr/td[10]/a[2]")
-        time.sleep(0.5)
-        edit_icon.click()
-        time.sleep(1)
-
-    except NoSuchElementException:
-        print("Search box not found — skipping edit action.")
+    #Click on Edit icon
+    edit_icon = driver.find_element(By.XPATH, "//*[@id='main-wrapper']/div[1]/div/app-plant-list/div/div/div[2]/div[2]/table/tbody/tr/td[10]/a[2]")
+    time.sleep(0.5)
+    edit_icon.click()
+    time.sleep(1)
     
     new_tarrif = item.get("tarrif_changes")
     tarrif_field = driver.find_element(By.ID, "tariff")
