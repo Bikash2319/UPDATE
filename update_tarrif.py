@@ -17,8 +17,8 @@ driver.implicitly_wait(5)
 wait = WebDriverWait(driver, 10)
 
 #Inject token for authentication
-driver.get("https://refex.dev.gensomerp.com/login")
-token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiaWthc2guc2Fob29Ac2hhcmFqbWFuLmNvbSIsImxvZ2luX2lkIjoyNiwidXNlcl9pZCI6MzEsInVzZXJfdHlwZSI6Ik8mTSBURUFNIiwiZXhwIjoxNzYyNDcxNjQ3fQ.rPRTd2QloLRqJlb0HqM6LZlabba1doKgK4c8DBIR2WA"
+driver.get("https://refex.gensomerp.com/login")
+token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiaWthc2guc2Fob29Ac2hhcmFqbWFuLmNvbSIsImxvZ2luX2lkIjoyNiwidXNlcl9pZCI6MzEsInVzZXJfdHlwZSI6Ik8mTSBURUFNIiwiZXhwIjoxNzYyNTI3MzI2fQ.3pjyvyVvL29MLfMnNppcgNkawlx7C0sMtYx5fNUUFsQ"
 driver.execute_script(f"window.localStorage.setItem('token', '{token}');")
 print("Login Successful")
 
@@ -27,7 +27,7 @@ df = pd.read_excel(file_path, "Tarrif")
 data_list = df.to_dict(orient="records")
 
 for item in data_list:
-    driver.get("https://refex.dev.gensomerp.com/plant-management")
+    driver.get("https://refex.gensomerp.com/plant-management")
 
     try:
         project_name = item.get("site_name").strip()
@@ -46,16 +46,16 @@ for item in data_list:
         time.sleep(0.5)
 
     
-        # new_tarrif = item.get("tarrif_changes")
-        # tarrif_field = driver.find_element(By.ID, "tariff")
-        # time.sleep(0.5)
-        # tarrif_field.clear()
-        # time.sleep(0.5)
-        # tarrif_field.send_keys(new_tarrif)
-        # time.sleep(0.5)
+        new_tarrif = item.get("tarrif_changes")
+        tarrif_field = driver.find_element(By.ID, "tariff")
+        time.sleep(0.5)
+        tarrif_field.clear()
+        time.sleep(0.5)
+        tarrif_field.send_keys(new_tarrif)
+        time.sleep(0.5)
 
         driver.find_element(By.XPATH, "//button[text() = ' Update ']").click()
-        print(project_name)
+
     
     except NoSuchElementException:
         print(f"Project '{project_name}' not found.")
